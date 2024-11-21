@@ -25,14 +25,14 @@ public:
 	TStack& operator=(const TStack& stack) = delete;
 
 	void Clear() { 
-		while (top != -1) {
-			pMem[top--]=T();
-		}
+		delete[] pMem;
+		pMem = new T[memSize];
+		top = -1;
 	}
 
-	bool Empty() { return top == -1; }
+	bool Empty() const { return top == -1; }
 
-	size_t Size() { return top + 1; }
+	size_t Size() const { return top + 1; }
 
 	T& Top() { 
 		if (top <= 0) throw std::out_of_range("Stack is empty!");
